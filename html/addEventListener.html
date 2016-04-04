@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button id="btn">click me</button>
+</body>
+<script>
+    var oBtn = document.getElementById("btn");
+    function f(){
+        alert("Thanks again!");
+    }
+    function ff(){
+        alert("Thanks again!!");
+    }
+    if(oBtn.addEventListener){
+        oBtn.addEventListener("click",f,false);
+        cancelHandler(oBtn);  //事件取消，后面的时间都被取消
+        oBtn.addEventListener("click",ff,false);
+       // oBtn.preventDefault(); //事件取消，后面的时间都被取消
+    }else if(oBtn.attachEvent){  //IE
+        oBtn.attachEvent("onclick", f);
+        oBtn.returnValue = false; //事件取消，后面的时间都被取消
+        oBtn.attachEvent("onclick", ff);
+    }
+    oBtn.onclick = function(){alert("Thanks for clicking me!");};
+    //解决addEventListener()注册事件时调用的处理程序使用事件目标作为它们的this值
+    //而attachEvent()注册的处理程序作为函数调用是this值是全局(Window)对象
+    function addEvent(target, type, handler) {
+        if(target.addEventListener){
+            target.addEventListener(type, handler, false);
+        } else {
+            target.attachEvent("on" + type, function(event){
+                return handler.call(targer, event);  //将handler处理函数call为对象target的方法，那么这个处理函数的this值就是target
+            });
+        }
+    }
+    function cancelHandler(event) {
+        var event = event || window.event;  //IE
+        if(event.preventDefault){
+            event.preventDefault();
+        }
+        if(event.returnValue){
+            event.returnValue = false;  //IE
+        }
+        return false;   //用于处理使用对象属性注册的处理程序
+    }
+</script>
+</html>

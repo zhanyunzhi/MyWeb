@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script src="../js/changeDateShow.js"></script>
+<script>
+    /*function alert(s){
+        return console.log(s);
+    }*/
+    this.alert = function(s){
+        return console.log(s);
+    }
+    Object.prototype.log = function(s){
+        return console.log(s);
+    }
+    alert(changeDateShow("2016-02-21"));
+    /*function Point(x, y){
+        this.x = x;
+        this.y = y;
+    }
+    Point.prototype.r = function(){   //通过原型为Point添加r方法
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
+    var p = new Point(3, 4);
+    console.log(p.r());*/
+
+    /*(function(){
+        var s = "qwer";
+        s = new String(s);
+        s.len = 6;
+        alert(s.len);
+    }());   //匿名函数，立即执行*/
+
+    (function(){
+        /*function log(s){
+            return console.log(s);
+        }*/
+        var s = "hello js";
+        s.toUpperCase(); //返回“HELLO JS”，但是并没有改变s的值
+        //s = s.toUpperCase(); //除非s重新赋值
+        log(s);  //原始值是不可更改的
+
+        var a = ["a","b","c"];
+        var b = a;  //b和a来自同一个引用
+        b[0] = 1; //修改b的同时修改了a
+        log(a[0]); //==>1;
+
+        var o = {x:1};
+        var p = {x:1};
+        log(o === p);  //相同属性的两个对象比较false
+
+        var a = [];
+        var b = [];
+        log(a === b);  //两个单独的数组永远不相等
+    }())
+
+    /*var scope = "global scope";//理解变量作用域
+    function checkscope(){
+        var scope = "local scope";
+        function nested(){
+            var scope = "nested scope"
+            return scope;
+        }
+        return nested();
+    }
+    alert(checkscope());*/
+</script>
+</html>

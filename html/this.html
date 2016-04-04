@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script>
+    var o = {
+        m : function(){
+            var self = this;
+            console.log(o === this);
+            f();
+            function f(){
+                console.log(o === this);
+                console.log(o === self);
+            }
+        }
+    }
+    o.m();
+    var m = function(){
+        var a = 0;
+        /*return {
+            f : function(){ return a++ }
+        }*/
+        var f = function(){
+            return a++;
+        }
+        return f;   //返回函数对象，如果返回f()则是返回函数f的调用结果
+    }
+    var c = m();
+    console.log(c());
+    console.log(c());
+    var b = m();
+    console.log(b());
+
+    function test(obj) {
+        var i = 0;
+        if(typeof obj == "object"){
+            var j = 0;
+            for(var k=0; k<10; k++){
+                console.log(k);
+            }
+            console.log(k);
+        }
+        console.log(j);
+    }
+    test(o);
+    var scope = "global";
+    function f(){
+        console.log(scope);     //输出undefined而不是global
+        var scope = "local";  //变了在这里赋初始值，但是变量本身在函数体内任何地方均是有定义的
+        console.log(scope);     //输出local
+    }
+    f();
+</script>
+</html>
