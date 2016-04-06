@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <hr/>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/someFun.js"></script>
+<script>
+    jQuery.fn.log = function(s){
+        return console.log(s);
+    };
+    document.writeln("<div id=\"window\" style=\"width:200px;height:200px;border:1px solid blue;text-align:center;background-color:#e3e3e3;display:none;\"></div>")
+    var alert = function(s){
+        //document.write(s);
+        $("#window").html(s);
+        $("#window").slideDown("slow");
+    }
+    $("#window").click(function(){
+        $("#window").slideUp(1000);
+    });
+    var a = {       //定义一个对象
+        r : 1
+    };
+    var b = inherit(a);  //b继承自a
+    b.x = 1;
+    b.y = 2;
+    b.r = 3;
+    $().log(a.r);  //==>1
+    alert(b.r);
+</script>
+</html>

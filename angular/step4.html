@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html ng-app="ngApp2">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="angular-1.4.1/angular.js"></script>
+    <script src="js/controllers.js"></script>
+</head>
+<body ng-controller="PhoneListCtrl2">
+    search:<input ng-model="query"/>
+    <!--Uppercased: {{ query | uppercase }}-->
+    sort by:
+    <select ng-model="orderProp2">
+        <option value="name">Alphabeticao</option>
+        <option value="age">Newest</option>
+    </select>
+    <ul>
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp2">
+            {{phone.name}}
+            <p>{{phone.snippet}}</p>
+            <p>{{phone.age}}</p>
+        </li>
+    </ul>
+    {{phones | json}}
+    <img ng-src="{{imageUrl}}" />
+</body>
+</html>
